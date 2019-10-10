@@ -11,6 +11,7 @@
 ### Overview 
 
 The code included in the assignment is a basic ray tracer, largely taken from the Typescript [samples](https://github.com/Microsoft/TypeScriptSamples) on github.com. It has been extended to render the frames incrementally (line by line) so that the frames are displayed as they are rendered, to allow the rendering resolution to be different than the canvas size, and to render multiple frames into a video with the Whammy client-side WebM video encoder (https://github.com/antimatter15/whammy).  The project creates a video like this:
+
 ![Video created with provided code](raytraced-movie.gif)
 
 **IMPORTANT**:  the Whammy library relies on being able to create (not just view) "image/webp" images from a canvas. It does not work in all web browsers (e.g., we had problems with Safari and Firefox); while most browsers now display WebM video and WebP images, they do not all support converting image buffers to WebP.  We recommend you use Chrome for this assignment. 
