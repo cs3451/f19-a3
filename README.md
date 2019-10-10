@@ -32,7 +32,7 @@ Details are below, but at a high level:
 - For Soft Shadows, you should add a "size" to each light, and each time a light ray is needed, sample from across the light.  There are two approaches you can choose from.
 - For Motion Blur, you should enhance the supersampling implemented for anti-aliasing so that each ray cast into the scene should have a random time in the video frame time interval associated with it, and that time should be used to compute all relevant properties of objects.
 
-All of your videos should be generated at 640x480, with the same vertical field of view as in the sample code. (If you tried to use the current code to generate a non-square video, the sphere's would be distorted).
+All of your videos should be generated at 640x480. 
 
 ## Details
 
