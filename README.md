@@ -29,7 +29,7 @@ You will implement two specific uses of distribution ray tracing:
 
 Details are below, but at a high level:
 
-- For Soft Shadows, you should add a "size" to each light, and each time a light ray is needed, sample from across the light.  There are two approaches you can choose from.
+- For Soft Shadows, you should add a "size" to each light, and each time a light ray is needed, sample from across the light.  There are at least two different approaches you can choose to implement (described below).
 - For Motion Blur, you should enhance the supersampling implemented for anti-aliasing so that each ray cast into the scene should have a random time in the video frame time interval associated with it, and that time should be used to compute all relevant properties of objects.
 
 All of your videos should be generated at 640x480. 
@@ -68,23 +68,30 @@ The default (non-moving) Sphere could just return the center vector. You could i
 
 #### Soft Shadows
 
-For soft shadows, you will build on top of the antialiasing implementation, but implement the area light source as described in the book or the class slides.  The difference between these two is that the final version in the book picks a set of random points to use for the area lights that is the same size as the number of initial rays generated per pixel, and uses one light sample per ray on all the area lights.  In the version in the notes, each time a surface point P has it's color contribution calculated for a light, a set of rays are generated for the area light source.  (The latter version is much more computationally expensive, but generates a more predictable image for the same size grid of initial rays per pixel.)
+For soft shadows, you will build on top of the antialiasing implementation, but implement area light sources. There are different ways to do this, as described in the book and the class slides.  We recommend using one of these approaches, but if you have a different approach you want to use, please check with us.
 
-In either case, you will need to change the Light objects to have a two additional points that specify the size and orientation of the light, ```a: Vector``` and ```b: Vector```, similar to Figure 13.14 in the text. However, instead of the current light position being the ```c: Vector``` in Figure 13.14 (at the lower left of the area light), it should be the center, so the actual light will be twice the size of the illustration in 13.14 (i.e., the light goes from ```[c-a,c-b]``` to ```[c+a, c+b]```).  The 2D randomized pixel generated for each light would be two [0 ... 1] values, which specify where in this rectangle the ray starts (e.g., [0.5, 0.5] is the center, which is the original light position).  
+The difference between the two recommended approaches is that the final version in the book picks a set of random points to use for the area lights that is the same size as the number of initial rays generated per pixel, and uses one light sample per ray on all the area lights.  In the version in the notes, each time a surface point P has it's color contribution calculated for a light, a set of rays are generated for the area light source.  (The latter version is much more computationally expensive, but generates a more predictable image for the same size grid of initial rays per pixel.)
 
-The changes required for the code differ depending on which version you choose to implement.  For the first version, you will need to add a 2D parameter to ```traceRay()``` (and any other methods you need to) for the jittered light position value to be passed down and used by the lighting computations.  For the second version, you will need to pass down the grid size into the part of the code that computes the contribution of a light to color of a point (so you can generate the grid of rays there). 
+Regardless of the approach, you will need to change the Light objects to have a two additional points that specify the size and orientation of the light, ```a: Vector``` and ```b: Vector```, similar to Figure 13.14 in the text. However, instead of the current light position being the ```c: Vector``` in Figure 13.14 (at the lower left of the area light), it should be the center, so the actual light will be twice the size of the illustration in 13.14 (i.e., the light goes from ```[c-a,c-b]``` to ```[c+a, c+b]```).  The 2D randomized pixel generated for each light would be two [0 ... 1] values, which specify where in this rectangle the ray starts (e.g., [0.5, 0.5] is the center, which is the original light position).  
+
+The changes required for the code differ depending on how you choose to implement things.  For the book version, you will need to add a 2D parameter to ```traceRay()``` (and any other methods you need to) for the jittered light position value to be passed down and used by the lighting computations.  For the class notes version, you will need to pass down the grid size into the part of the code that computes the contribution of a light to color of a point (so you can generate the grid of rays there). 
 
 ## Submission
 
 Your grade will be based on satisfying the requirements described above.  You should clearly indicate in your submitted version of this README which option you chose for the 2nd part.
 
-You will check out the project from github classroom, and submit it there.  The project folder should contain the files that were in the sample project, plus any additions to the sample project that are needed to implement the project.  Do not add extra files, and do not remove the .gitignore file (we do not want the "node_modules" directory in your repository.)
+**You should add a boolean ```onlyAntialias``` flag to ```render()``` to tell the raytracer to run either with antialiasing (flag true) or with antialiasing and your additional effect**.  This will allow you (or the TAs) to generate either the anti-aliased video, or the additional effect video.  
 
-You will also submit four movies.  The movies should be 640x480 resolution, at least 2 seconds long, with a frame rate of 10 fps.  The movies should be:
+Also, for the third video, **you should create a new scene**, and leave the ```defaultScene()``` as it is, so the original scene or the new scene can be used.
+
+You will check out the project from github classroom, and submit it there.  The project folder should contain the files that were in the sample project, plus any additions to the sample project that are needed to implement the project.  Do not remove the .gitignore file (we do not want the "node_modules" directory in your repository.)
+
+You will also submit at least three movies.  The movies should be 640x480 resolution, at least 2 seconds long, with a frame rate of 10 fps.  Please name the movies appropriately so the TAs know which is white.  The movies should be:
 
 1. Movie of the same sample scene created by the sample code, with the addition of antialiasing.
 2. The same movie as 2., with the addition of either Motion blur or Soft Shadows.
 3. Change the scene in some non-trivial ways (e.g., at least change change the light color and positions, and the positions and attributes of the objects in the scene).  You are free to add new kinds of motions, or make other changes that interest you, but that is not required.
+
 
 Each movie should be an MP4 file, so it is easy for the TAs to view.  You should download the .webm movie (be sure to name it with the .webm suffix) and convert to an .mp4 of the same resolution.  We had success and using the web service at http://video.online-convert.com/convert-to-mp4. (There are also software packages you can download for different platforms.) Please make sure to create an MP4 file of the same size and framerate as your .webm movie.
 
