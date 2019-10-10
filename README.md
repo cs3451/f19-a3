@@ -44,11 +44,11 @@ The changes necessary for the implementing antialiasing will all be in the ```re
 
 ### Chose One of Two Additional Features
 
-Choose between Motion Blur and Soft Shadows.  These will build on the antialiasing implementation, using the same ```grid: number``` parameter to determine the number of pixels to show in the scene per randomized value.  
+Choose between Motion Blur and Soft Shadows.  These will build on the antialiasing implementation, using the same ```grid: number``` parameter to determine the number of rays to shoot in the scene per pixel.  
 
 For Motion Blur, we use a different time value for each of the rays, and then do anti-aliasing of the final pixel as above.
 
-For Soft Shadows, we will use a random sampling across the light source.  You may choose to either do one random sample for the light for each ray from the eye (as described in the book) or do a grid of random samples from each point to each light;  the later will use a lower grid number, but have a higher computational cost, so the former is likely the best approach. 
+For Soft Shadows, we will use a random sampling across the light source.  You may choose to either do one random sample for the light for each ray from the eye (as described in the book) or do a grid of random samples from each point to each light;  the later will use a lower grid number for a similar result, but have a higher computational cost (so it will run slower).  Choose whichever you are more comfortable with. 
 
 #### Motion blur
 
