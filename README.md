@@ -57,13 +57,14 @@ To implement motion blur, you will need to update the ```intersect()``` method o
 For each ray that you shoot into the scene, you should sample a random time in the time interval corresponding to the current frame.  For example, if you are generating a video that has 10 frames per second, the 1st frame covers the time interval [0, 0.1], the second [0.1, 0.2], and so on, and pass that time value to ```traceRay()```.
 
 You will need to update the ```intersect()``` methods of the subclasses of ```Thing``` to take time into account:  the Plane object can ignore Time for this assignment.  
+
 One approach would be to add a new method to the Sphere to compute the center of the sphere at a given time: 
 ```js
 getCenter(time: number): Vector 
 ```
 The default (non-moving) Sphere could just return the center vector. You could implement a new ```Sphere``` called ```MovingSphere``` that overrides the ```getCenter()``` method to compute the center of a moving sphere. You would call this method to determine the center of the Sphere whenever it is needed by the ```intersect()``` method.  
 
-**IMPORTANT**:  the sample program has code to move the sphere embedded in the ```updateScene()``` method called from the ```render()``` method. When you create the MovingSphere, you should move all of this code into the ```computeCenter``` method, and remove it from ```updateScene()```.  
+**IMPORTANT**:  the sample program has code to move the sphere embedded in the ```updateScene()``` method called from the ```render()``` method. However you decide to arrange your code, you should move the relevent bits of this code into the ```computeCenter``` method, and remove it from ```updateScene()```.  
 
 #### Soft Shadows
 
