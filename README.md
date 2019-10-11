@@ -8,6 +8,13 @@
 
 **Choice:  PLEASE PUT Motion Blur or Soft Shadows here**
 
+## Rubric
+
+The assignment will be graded out of 30, and grades distributed as follow:
+- Antialiasing. 10
+- Additional Feature (Soft Shadows or Motion Blur). 15
+- Different scene. 5
+
 ### Overview 
 
 The code included in the assignment is a basic ray tracer, largely taken from the Typescript [samples](https://github.com/Microsoft/TypeScriptSamples) on github.com. It has been extended to render the frames incrementally (line by line) so that the frames are displayed as they are rendered, to allow the rendering resolution to be different than the canvas size, and to render multiple frames into a video with the Whammy client-side WebM video encoder (https://github.com/antimatter15/whammy).  The project creates a video like this:
@@ -18,7 +25,7 @@ The code included in the assignment is a basic ray tracer, largely taken from th
 
 The goal of this assignment is to extend this simple raytracer to support distribution ray tracing, specifically two improvements (antialiasing and one other effect) that make better looking videos.  You should read the appropriate sections in Chapter 13 in your textbook to prepare for the assignment.
 
-## Due: Thursday October 24th, 11:59pm
+## Due: Sunday October 27th, 11:59pm
 
 ## Overview 
 
